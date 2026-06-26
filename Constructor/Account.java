@@ -1,5 +1,89 @@
 package com.tcs.ilp;
 
+import java.util.*;
+
+public class Account{
+	
+	private int accnumber;
+	private String accountHolderNumber;
+	private double balance;
+	private String type;
+	
+	Account(int accnumber, String accountHolderNumber, double balance, String type){
+		this.accnumber=accnumber;
+		this.accountHolderNumber=accountHolderNumber;
+		this.balance=balance;
+		this.type=type;
+	}
+	
+	Account(int accnumber, String accountHolderNumber){
+		this.accnumber=accnumber;
+		this.accountHolderNumber=accountHolderNumber;
+		this.balance=5000;
+		this.type="Current Account";
+		}
+	
+	public void setAccnumber(int accnumber) {
+		this.accnumber=accnumber;
+	}
+
+	public int getAccnumber() {
+		return accnumber;
+	}
+
+	public String getAccountHolderNumber() {
+		return accountHolderNumber;
+	}
+
+	public void setAccountHolderNumber(String accountHolderNumber) {
+		this.accountHolderNumber = accountHolderNumber;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*package com.tcs.ilp;
+
+ 
+ 
 public class Account {
 	
 	int accnumber;
@@ -35,3 +119,4 @@ public class Account {
 	}
 
 }
+*/
