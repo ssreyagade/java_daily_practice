@@ -1,0 +1,128 @@
+package com.tcs.ilp;
+import java.util.*;
+
+
+public class AssetRAMproblem {
+
+	public static void main(String[] args) {
+		
+		Scanner sc=new Scanner(System.in);
+		
+		Asset[] ass=new Asset[4];
+		
+		for(int i=0;i<ass.length;i++) {
+			
+			int a=sc.nextInt();
+			sc.nextLine();
+			String b=sc.nextLine();
+			int c=sc.nextInt();
+			sc.nextLine();
+			String d=sc.nextLine();
+			double e=sc.nextDouble();
+			sc.nextLine();
+			
+			ass[i]=new Asset(a,b,c,d,e);
+		}
+		
+		String status=sc.nextLine();
+		double arr=findAveragePriceByStatus(ass,status);
+		if(arr==0) {
+			System.out.println("No staus found");
+		}
+		else {
+			System.out.println("Status"+arr);
+		}
+		Asset arr2= findAssetWithHighestRAM(ass);
+		System.out.println(arr2.getAssetId());
+		System.out.println(arr2.getAssestName());
+		System.out.println(arr2.getRamSize());
+		System.out.println(arr2.getAssetStatus());
+		System.out.println(arr2.getPrice());
+		
+	}	
+		
+		public static double findAveragePriceByStatus(Asset[] a, String status) {
+			double avg=0;
+			double sum=0;
+			int count=0;
+			for(int i=0;i<a.length;i++) {
+				if(a[i].getAssetStatus().equalsIgnoreCase(status)) {
+					sum=sum + a[i].getPrice();
+					count++;
+				}
+			}
+			if(count==0) {
+				return 0;
+			}
+			avg= sum/count;
+			return avg;
+		}
+		
+		public static Asset findAssetWithHighestRAM(Asset[] a) {
+			Asset highest=a[0];
+			for(int i=0;i<a.length;i++) {
+				if(a[i].getRamSize()>highest.getRamSize()) {
+					highest=a[i];
+				}
+				else if(a[i].getRamSize()==highest.getRamSize() && a[i].getPrice()>highest.getPrice()) {
+					highest=a[i];
+				}
+			}
+			return highest;
+			
+		}
+		
+		
+}
+
+
+
+
+class Asset{
+	private int assetId;
+	private String assestName;
+	private int ramSize;
+	private String assetStatus;
+	private double price;
+	public Asset(int assetId, String assestName, int ramSize, String assetStatus, double price) {
+		super();
+		this.assetId = assetId;
+		this.assestName = assestName;
+		this.ramSize = ramSize;
+		this.assetStatus = assetStatus;
+		this.price = price;
+	}
+	public int getAssetId() {
+		return assetId;
+	}
+	public void setAssetId(int assetId) {
+		this.assetId = assetId;
+	}
+	public String getAssestName() {
+		return assestName;
+	}
+	public void setAssestName(String assestName) {
+		this.assestName = assestName;
+	}
+	public int getRamSize() {
+		return ramSize;
+	}
+	public void setRamSize(int ramSize) {
+		this.ramSize = ramSize;
+	}
+	public String getAssetStatus() {
+		return assetStatus;
+	}
+	public void setAssetStatus(String assetStatus) {
+		this.assetStatus = assetStatus;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	
+	
+}
