@@ -1,0 +1,140 @@
+package com.tcs.ilp;
+import java.util.*;
+
+public class BankKYC {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		Customer[] cust=new Customer[4];
+		
+		for(int i=0;i<cust.length;i++) {
+			int a=sc.nextInt();
+			sc.nextLine();
+			String b=sc.nextLine();
+			String c=sc.nextLine();
+			double d=sc.nextDouble();
+			sc.nextLine();
+			String e=sc.nextLine();
+			
+			cust[i]=new Customer(a,b,c,d,e);
+		}
+		int verified = countVerifiedCustomers(cust);
+		System.out.println(verified);
+
+		String accountType = sc.nextLine();
+
+		Customer c1 = findHighestBalanceCustomer(cust, accountType);
+		System.out.println(c1.getCustomerId());
+		System.out.println(c1.getCustomerName());
+		System.out.println(c1.getAccountBalance());
+		System.out.println(c1.getAccountType());
+		System.out.println(c1.getKycStatus());
+
+		Customer c2 = updatePremium(cust);
+		System.out.println(c2.getCustomerId());
+		System.out.println(c2.getCustomerName());
+		System.out.println(c2.getAccountBalance());
+		System.out.println(c2.getAccountType());
+		System.out.println(c2.getKycStatus());
+
+	}
+	
+	
+	public static int countVerifiedCustomers(Customer[] c) {
+		int count=0;
+		for(int i=0;i<c.length;i++) {
+			if(c[i].getKycStatus().equalsIgnoreCase("Verified")) {
+			count++;}
+		}
+		return count;
+	}
+	
+	public static Customer findHighestBalanceCustomer(Customer[] c,String accountType) {
+		Customer highest=c[0];
+
+		for(int i=0;i<c.length;i++) {
+			if(c[i].getAccountType().equals(accountType)) {
+				if(highest.getAccountBalance()<c[i].getAccountBalance()) {
+					highest=c[i];
+				}
+			}
+			else if(highest.getAccountBalance()==c[i].getAccountBalance() && highest.getCustomerId()>c[i].getCustomerId()) {
+					highest=c[i];
+
+			}
+		}return highest;
+	}
+	
+	public static Customer updatePremium(Customer[] c) {
+		Customer highest=null;
+		for(int i=0;i<c.length;i++) {
+			if(c[i].getAccountBalance()>500000) {
+				c[i].setAccountType("Premium");
+				if(highest == null || c[i].getAccountBalance() > highest.getAccountBalance()) {
+					highest=c[i];
+					}
+			}
+		}return highest;
+	}
+
+}
+
+class Customer{
+	private int customerId;
+	private String customerName;
+	private String accountType;
+	private double accountBalance;
+	private String kycStatus;
+	
+	public Customer(int customerId, String customerName, String accountType, double accountBalance, String kycStatus) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.accountType = accountType;
+		this.accountBalance = accountBalance;
+		this.kycStatus = kycStatus;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public double getAccountBalance() {
+		return accountBalance;
+	}
+
+	public void setAccountBalance(double accountBalance) {
+		this.accountBalance = accountBalance;
+	}
+
+	public String getKycStatus() {
+		return kycStatus;
+	}
+
+	public void setKycStatus(String kycStatus) {
+		this.kycStatus = kycStatus;
+	}
+	
+	
+	
+}
